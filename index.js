@@ -17,6 +17,12 @@ console.log(chalk.yellow("🚀 Starting server..."));
 const __dirname = process.cwd();
 const server = http.createServer();
 const app = express();
+// Canva 埋め込み用
+app.use((req, res, next) => {
+  res.setHeader("X-Frame-Options", "ALLOWALL");
+  next();
+});
+app.use("/ov", cors({ origin: true }));
 const bareServer = createBareServer("/ca/");
 const PORT = process.env.PORT || 8080;
 const cache = new Map();
